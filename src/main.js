@@ -87,19 +87,31 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
+const galleryEl = document.getElementById('gallery');
+
 window.addEventListener('scroll', () => {
   if (viewportContainer.style.display === 'none') return;
   const scrollY = window.scrollY;
   const vh = window.innerHeight;
-  const progress = Math.min(1, Math.max(0, scrollY / (vh * 0.85)));
 
-  if (heroEl) {
+  if (heroEl && galleryEl) {
     const isMobile = window.innerWidth <= 768;
+    const galleryTop = galleryEl.offsetTop;
+    const distanceToGallery = galleryTop - scrollY;
+
+    // Transition happens over transitionZone as gallery enters viewport
+    const transitionZone = isMobile ? Math.min(vh * 0.9, 550) : vh * 0.9;
+    
+    // progress is 0 while distanceToGallery > transitionZone (full hero visible while scrolling through bio)
+    // progress smoothly goes 0 -> 1 as gallery approaches the top
+    const progress = Math.min(1, Math.max(0, (transitionZone - distanceToGallery) / transitionZone));
+
     if (isMobile) {
-      // Clean 2D fade on mobile so 3D transform layers don't overlap canvas
-      heroEl.style.transform = `translateY(${-progress * 50}px)`;
-      heroEl.style.opacity = (1 - progress * 1.1).toFixed(3);
-      heroEl.style.pointerEvents = progress > 0.35 ? 'none' : 'auto';
+      // In mobile: hero stays 100% visible while reading.
+      // Only when approaching the gallery does it gently fade away
+      heroEl.style.transform = `translateY(${-progress * 45}px)`;
+      heroEl.style.opacity = (1 - progress * 0.95).toFixed(3);
+      heroEl.style.pointerEvents = progress > 0.65 ? 'none' : 'auto';
     } else {
       const translateZ = -progress * 460;
       const translateY = -progress * 70;
