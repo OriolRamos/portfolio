@@ -3,6 +3,7 @@ import Lenis from 'lenis';
 import { portfolioData } from './data.js';
 import { createFloppyDiskMesh } from './floppy.js';
 import { createFloppyDriveUnit } from './floppyDrive.js';
+import { BRAND_IMAGES_B64 } from './brandImages.js';
 import { playMechanicalClick, playFloppyInsertSound } from './sound.js';
 
 // --- STATE MANAGEMENT ---
@@ -468,7 +469,14 @@ function renderStageDetail(diskData) {
   stageBadge.textContent = `DISK ${diskData.diskNumber} · HD 1.44MB · ${content.badge || 'STATUS: ONLINE'}`;
   stageTitle.textContent = content.title;
   stageSubtitle.textContent = content.subtitle;
-  stageLogoImg.src = diskData.brandLogo;
+  
+  // High-reliability logo rendering: use Base64 embedded asset first to guarantee 0-latency load on all domains/subpaths
+  stageLogoImg.src = BRAND_IMAGES_B64[diskData.id] || diskData.brandLogo;
+  stageLogoImg.onerror = () => {
+    if (BRAND_IMAGES_B64[diskData.id]) {
+      stageLogoImg.src = BRAND_IMAGES_B64[diskData.id];
+    }
+  };
 
   metaRoleLabel.textContent = ui.specsRole;
   metaRoleVal.textContent = content.subtitle;

@@ -149,7 +149,7 @@ export const portfolioData = {
     {
       id: "dxc",
       diskNumber: "01",
-      brandLogo: "/brands/dxc.png",
+      brandLogo: "./brands/dxc.png",
       websiteUrl: "https://www.dxc.com/",
       color: "#281b3d", // Deep DXC Purple slate
       labelColor: "#ffffff",
@@ -224,7 +224,7 @@ export const portfolioData = {
     {
       id: "clothy",
       diskNumber: "02",
-      brandLogo: "/brands/clothy.png",
+      brandLogo: "./brands/clothy.png",
       websiteUrl: "https://www.clothy.es/",
       color: "#1c1815", // Warm obsidian
       labelColor: "#ffffff",
@@ -302,7 +302,7 @@ export const portfolioData = {
     {
       id: "unir",
       diskNumber: "03",
-      brandLogo: "/brands/unir.png",
+      brandLogo: "./brands/unir.png",
       websiteUrl: "https://estudiar.unir.net/landings/es_es/ing-pro-mas-ofi-noa-master-universitario-inteligencia-artificial/",
       color: "#08233e", // UNIR Navy Blue
       labelColor: "#ffffff",
@@ -377,7 +377,7 @@ export const portfolioData = {
     {
       id: "dset",
       diskNumber: "04",
-      brandLogo: "/brands/dset.png",
+      brandLogo: "./brands/dset.png",
       websiteUrl: "https://dset.solutions/ca/",
       color: "#0f2c29", // Industrial Teal
       labelColor: "#ffffff",
@@ -449,7 +449,7 @@ export const portfolioData = {
     {
       id: "udg",
       diskNumber: "05",
-      brandLogo: "/brands/udg.png",
+      brandLogo: "./brands/udg.png",
       websiteUrl: "https://www.udg.edu/ca/estudia/Oferta-formativa/Graus/Fitxes?IDE=1257&ID=3105G0710",
       color: "#081330", // Royal UdG Blue
       labelColor: "#ffffff",
