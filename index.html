@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oriol Ramos Abel — Especialista en IA & AI Builder</title>
+  <meta name="description" content="Portfolio interactiu 3D d'Oriol Ramos Abel. Especialista en IA, AI Builder, Enginyer de Software i creador de projectes d'IA per a Jon Hernández.">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="icon" type="image/png" href="/oriol_profile.png">
+</head>
+<body>
+  <!-- Analog Film Grain (Exact A24 subtle grain) -->
+  <div class="grain"></div>
+
+  <!-- Top Floating Navigation -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="#" class="nav-logo">
+        Oriol Ramos
+        <span class="nav-logo-tag" id="ui-role-tag">AI BUILDER</span>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <a href="#hero" class="nav-link active" id="nav-bio">Bio</a>
+      <a href="#gallery" class="nav-link" id="nav-disks">Disquets 3D</a>
+      <!-- Language Switcher Pills -->
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="ca">CA</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <span class="lang-sep">/</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <!-- Theme Switcher: Fons Blanc vs Fons Negre -->
+      <button id="theme-toggle" class="theme-toggle-btn" title="Canviar entre fons blanc i fons fosc">
+        <span id="theme-icon">☀️</span>
+        <span id="ui-theme-btn">Fons Blanc</span>
+      </button>
+
+      <!-- GitHub Profile Link -->
+      <a href="https://github.com/OriolRamos" target="_blank" rel="noopener noreferrer" class="btn-pill" title="Veure perfil de GitHub @OriolRamos">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+
+      <!-- Mechanical Sound Toggle Button -->
+      <button id="sound-toggle" class="sound-btn" title="Activar/Desactivar efectes de so mecànics">
+        <svg id="sound-icon-on" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+      </button>
+
+      <!-- CV Download -->
+      <a href="/Oriol_Ramos_CV.pdf" target="_blank" class="btn-pill btn-pill-primary">
+        <span id="ui-download-cv">Descarregar CV</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Master Container -->
+  <div id="viewport-container">
+
+    <!-- HERO LANDING SECTION (ORIOL'S PROFILE) -->
+    <section id="hero" class="hero-landing">
+      <div class="hero-grid">
+        <!-- Left: Profile Photo Card -->
+        <div class="photo-container">
+          <img src="/oriol_profile.png" alt="Oriol Ramos Abel" class="photo-img">
+          <div class="photo-overlay-badge">
+            <span class="photo-badge-status">
+              <span class="pulse-dot"></span>
+              <span id="ui-status-available">DISPONIBLE IMMEDIATAMENT</span>
+            </span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #94a3b8;" id="ui-location-presential">
+              BARCELONA · 100% PRESENCIAL
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Bio & Key Information -->
+        <div class="hero-content">
+          <div class="hero-meta-bar">
+            <div class="hero-location">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              Barcelona, Espanya
+            </div>
+            <div class="hero-age-pill" id="ui-age-years">24 Anys (02/07/2002)</div>
+            <div class="hero-age-pill" id="ui-degree-title">Enginyer Informàtic + Màster IA</div>
+          </div>
+
+          <h1 class="hero-title" id="ui-hero-greeting">Oriol Ramos Abel</h1>
+          <h2 class="hero-subtitle" id="ui-hero-subtitle">Especialista en IA & AI Builder // La mà dreta executora</h2>
+
+          <p class="hero-bio" id="ui-hero-bio">
+            Profundament motivat per aplicar la intel·ligència artificial per crear solucions i productes reals. No només entenc els models per dins: <strong>m'apassiona experimentar, automatitzar i passar d'una idea a un prototip funcional en qüestió d'hores</strong>. Cofundador del projecte premiat <em>Clothy</em> i desenvolupador de solucions d'IA per a <em>DXC Technology</em> i la <em>Generalitat de Catalunya</em>.
+          </p>
+
+          <!-- 3 Passion Cards -->
+          <div class="passions-grid">
+            <div class="passion-card">
+              <div class="passion-card-title" id="ui-passion-title-1">⚡ IA Aplicada & Prototipatge</div>
+              <div class="passion-card-desc" id="ui-passion-desc-1">Construcció veloç de bots, agents d'IA, webs i apps interactives explotant els últims models del mercat.</div>
+            </div>
+            <div class="passion-card">
+              <div class="passion-card-title" id="ui-passion-title-2">📈 Inversió & Mercats</div>
+              <div class="passion-card-desc" id="ui-passion-desc-2">Interès actiu per l'anàlisi financer des de la joventut, aportant visió estratègica i gestió analítica de recursos.</div>
+            </div>
+            <div class="passion-card">
+              <div class="passion-card-title" id="ui-passion-title-3">🤖 Agents & Workflows</div>
+              <div class="passion-card-desc" id="ui-passion-desc-3">Arquitectures RAG neuro-simbòliques, integració d'APIs d'última generació i automatització low-code/no-code.</div>
+            </div>
+          </div>
+
+          <!-- Hero Actions -->
+          <div class="hero-actions">
+            <a href="mailto:oriol842@gmail.com" class="btn-pill btn-pill-primary" id="ui-contact-direct">
+              Contactar Directament
+            </a>
+            <a href="https://github.com/OriolRamos" target="_blank" rel="noopener noreferrer" class="btn-pill" style="gap: 0.6rem;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>GitHub: @OriolRamos</span>
+            </a>
+            <div id="scroll-prompt" class="scroll-indicator">
+              <span id="ui-scroll-prompt">Fes Scroll per obrir els disquets 3D</span>
+              <svg class="scroll-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D FLOPPY DISK GALLERY SECTION -->
+    <section id="gallery" class="gallery-section">
+      <div class="gallery-header">
+        <div>
+          <h2 class="gallery-heading" id="ui-gallery-heading">Trajectòria Professional & Formació</h2>
+          <p class="gallery-subheading" id="ui-gallery-subheading">MEMÒRIA 3.5" · DISQUETS INTERACTIUS THREE.JS · SELECCIONA O ARROSSEGA</p>
+        </div>
+
+        <div class="disk-selector-tabs" id="disk-tabs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- 3D WebGL Canvas Wrap -->
+      <div class="canvas-wrap" id="canvas-container">
+        <canvas id="three-canvas"></canvas>
+      </div>
+
+      <!-- Footer Info Bar -->
+      <div class="gallery-footer-info">
+        <div class="current-disk-card">
+          <span class="current-disk-num" id="active-disk-num">01</span>
+          <div>
+            <h3 class="current-disk-title" id="active-disk-title">DXC TECHNOLOGY</h3>
+            <p class="current-disk-role" id="active-disk-role">AI Business Developer (2025 - Present)</p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+          <div class="disk-interact-hint" id="ui-interact-hint">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+            <span>ARROSSEGA PER ROTAR // FES CLIC PER LLEGIR</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+
+          <button id="open-disk-modal-btn" class="btn-pill btn-pill-primary">
+            <span id="ui-inspect-btn">Inspeccionar Fitxa Tècnica</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- CINEMATIC PAGE TRANSITION CURTAIN (A24 / BARBA STYLE) -->
+  <div id="transition-curtain" class="page-transition-curtain"></div>
+
+  <!-- DEDICATED STAGE PAGE (EXACT A24 PRODUCTION PAGE REPLICATION) -->
+  <main id="stage-detail-container" class="stage-page-container">
+    <section class="stage-hero">
+      <div class="stage-hero-back-bar">
+        <button id="stage-back-btn" class="stage-back-btn" title="Tornar als disquets 3D">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span id="stage-back-text">← TORNAR ALS DISQUETS 3D</span>
+        </button>
+        <span class="stage-hero-badge" id="stage-badge">DISK 01 · HD 1.44MB</span>
+      </div>
+
+      <div class="stage-hero-title-row">
+        <div>
+          <h1 class="stage-hero-title" id="stage-title">DXC TECHNOLOGY</h1>
+          <p class="stage-hero-subtitle" id="stage-subtitle">AI Business Developer & Generative AI Specialist</p>
+        </div>
+        <div class="stage-hero-logo-card">
+          <img id="stage-logo-img" src="/brands/dxc.png" alt="Logo" class="stage-hero-logo-img">
+        </div>
+      </div>
+
+      <!-- 4-Column Metadata Specs Grid (Exact A24 Table) -->
+      <div class="stage-meta-grid">
+        <div class="meta-field">
+          <div class="meta-field-label" id="meta-role-label">ROL / CÀRREC</div>
+          <div class="meta-field-value" id="meta-role-val">AI Business Developer</div>
+        </div>
+        <div class="meta-field">
+          <div class="meta-field-label" id="meta-entity-label">CLIENT / ENTITAT</div>
+          <div class="meta-field-value" id="meta-entity-val">DXC & Generalitat de Catalunya</div>
+        </div>
+        <div class="meta-field">
+          <div class="meta-field-label" id="meta-period-label">PERÍODE</div>
+          <div class="meta-field-value" id="meta-period-val">2025 — Present</div>
+        </div>
+        <div class="meta-field">
+          <div class="meta-field-label" id="meta-location-label">UBICACIÓ / MODALITAT</div>
+          <div class="meta-field-value" id="meta-location-val">Barcelona (100% Presencial)</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons Bar -->
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem;">
+        <a id="stage-website-link" href="#" target="_blank" rel="noopener noreferrer" class="btn-pill btn-pill-primary">
+          <span id="stage-website-text">Visitar Web Oficial</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+        <a href="https://github.com/OriolRamos" target="_blank" rel="noopener noreferrer" class="btn-pill">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub: @OriolRamos</span>
+        </a>
+        <a href="/Oriol_Ramos_CV.pdf" target="_blank" class="btn-pill">
+          <span id="stage-download-cv">Descarregar CV (PDF)</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="stage-content-section">
+      <!-- 01 Executive Summary -->
+      <div class="stage-overview-box">
+        <div class="stage-section-heading" id="stage-sec-1-label">01 // RESUM EXECUTIU & IMPACTE REAL</div>
+        <p class="stage-overview-text" id="stage-overview-text">...</p>
+      </div>
+
+      <!-- 02 Benchmark Metrics -->
+      <div>
+        <div class="stage-section-heading" id="stage-sec-2-label">02 // MÈTRIQUES & RENDIMENT REAL</div>
+        <div class="stage-metrics-row" id="stage-metrics-row"></div>
+      </div>
+
+      <!-- 03 & 04 Two Columns Deep Dive -->
+      <div class="stage-deep-dive">
+        <div>
+          <div class="stage-section-heading" id="stage-sec-3-label">03 // RESPONSABILITATS, REPTES & IA APLICADA</div>
+          <ul class="stage-highlights-list" id="stage-highlights-list"></ul>
+        </div>
+        <div>
+          <div class="stage-section-heading" id="stage-sec-4-label">04 // ARQUITECTURA & STACK TECNOLÒGIC</div>
+          <div class="stage-stack-wrap" id="stage-stack-wrap"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Up Next Footer Banner (Exact A24 Reference) -->
+    <section class="stage-next-banner" id="stage-next-banner">
+      <div class="next-banner-left">
+        <span class="next-banner-tag" id="up-next-tag">SEGÜENT FITXA // UP NEXT</span>
+        <h2 class="next-banner-title" id="up-next-title">CLOTHY →</h2>
+      </div>
+      <div>
+        <button id="up-next-btn" class="btn-pill btn-pill-primary">
+          <span id="up-next-btn-text">Explorar Etapa Següent</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
