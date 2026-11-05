@@ -94,13 +94,22 @@ window.addEventListener('scroll', () => {
   const progress = Math.min(1, Math.max(0, scrollY / (vh * 0.85)));
 
   if (heroEl) {
-    const translateZ = -progress * 460;
-    const translateY = -progress * 70;
-    const rotateX = progress * 8;
-    const opacity = 1 - progress * 0.82;
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      // Clean 2D fade on mobile so 3D transform layers don't overlap canvas
+      heroEl.style.transform = `translateY(${-progress * 50}px)`;
+      heroEl.style.opacity = (1 - progress * 1.1).toFixed(3);
+      heroEl.style.pointerEvents = progress > 0.35 ? 'none' : 'auto';
+    } else {
+      const translateZ = -progress * 460;
+      const translateY = -progress * 70;
+      const rotateX = progress * 8;
+      const opacity = 1 - progress * 0.82;
 
-    heroEl.style.transform = `translate3d(0, ${translateY}px, ${translateZ}px) rotateX(${rotateX}deg)`;
-    heroEl.style.opacity = opacity.toFixed(3);
+      heroEl.style.transform = `translate3d(0, ${translateY}px, ${translateZ}px) rotateX(${rotateX}deg)`;
+      heroEl.style.opacity = opacity.toFixed(3);
+      heroEl.style.pointerEvents = progress > 0.6 ? 'none' : 'auto';
+    }
   }
 });
 
@@ -231,9 +240,48 @@ disks.forEach((diskData) => {
   diskMeshes.push(meshGroup);
 });
 
+// Dynamic responsive camera & 3D carousel metrics based on viewport aspect ratio
+function getResponsiveCameraConfig() {
+  const width = canvasContainer.clientWidth || window.innerWidth;
+  const height = canvasContainer.clientHeight || window.innerHeight;
+  const aspect = width / Math.max(height, 1);
+
+  let targetZ = 8.4;
+  let targetY = 0.12;
+  let lookAtY = -0.15;
+  let diskScale = 1.0;
+  let spacing = 3.35;
+
+  if (aspect < 0.65) {
+    // Narrow phone portrait (iPhone SE, 12, 13, 14, Android ~360-390px)
+    targetZ = 13.5;
+    targetY = 0.30;
+    lookAtY = -0.42;
+    diskScale = 0.88;
+    spacing = 2.45;
+  } else if (aspect < 0.9) {
+    // Standard phone / small tablet portrait
+    targetZ = 11.5;
+    targetY = 0.22;
+    lookAtY = -0.28;
+    diskScale = 0.92;
+    spacing = 2.75;
+  } else if (aspect < 1.25) {
+    // Tablet landscape / small desktop
+    targetZ = 9.8;
+    targetY = 0.16;
+    lookAtY = -0.20;
+    diskScale = 0.96;
+    spacing = 3.0;
+  }
+
+  return { aspect, targetZ, targetY, lookAtY, diskScale, spacing };
+}
+
 // Update 3D Positions for the Carousel (Exact A24 Spacing & Fan-Out Curve)
 function updateDisksTransform(animate = true) {
-  const spacing = 3.35;
+  const config = getResponsiveCameraConfig();
+  const spacing = config.spacing;
   const depthFalloff = 1.25;
   const angleSpread = 0.16;
 
@@ -245,7 +293,7 @@ function updateDisksTransform(animate = true) {
     const targetZ = -Math.abs(offset) * depthFalloff;
     const targetRotY = -offset * angleSpread;
     const targetRotX = offset === 0 ? -0.07 : 0.04;
-    const targetScale = offset === 0 ? 1.08 : 0.95;
+    const targetScale = (offset === 0 ? 1.08 : 0.95) * config.diskScale;
 
     if (!animate) {
       mesh.position.x = targetX;
@@ -727,6 +775,75 @@ window.addEventListener('mouseup', () => {
   isDragging = false;
 });
 
+// Mobile Touch Gestures (Swipe to change disk, Tap to insert & navigate)
+let touchStartX = 0;
+let touchStartY = 0;
+let isTouching = false;
+let touchMoved = false;
+
+canvasContainer.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    isTouching = true;
+    touchMoved = false;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }
+}, { passive: true });
+
+canvasContainer.addEventListener('touchmove', (e) => {
+  if (!isTouching || e.touches.length !== 1) return;
+  const touch = e.touches[0];
+  const deltaX = touch.clientX - touchStartX;
+  const deltaY = touch.clientY - touchStartY;
+
+  if (Math.abs(deltaX) > 8) {
+    touchMoved = true;
+  }
+
+  // Horizontal swipe between disks
+  if (Math.abs(deltaX) > 38) {
+    if (deltaX > 0) {
+      setActiveDisk(activeIndex - 1);
+    } else {
+      setActiveDisk(activeIndex + 1);
+    }
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    if (isSoundEnabled) playMechanicalClick(0.9);
+  }
+}, { passive: true });
+
+canvasContainer.addEventListener('touchend', (e) => {
+  if (isTouching && !touchMoved && !isTransitioning) {
+    // Single tap on canvas
+    const touch = e.changedTouches[0];
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(diskMeshes, true);
+    if (intersects.length > 0) {
+      let topGroup = intersects[0].object;
+      while (topGroup.parent && !diskMeshes.includes(topGroup)) {
+        topGroup = topGroup.parent;
+      }
+      const clickedIdx = diskMeshes.indexOf(topGroup);
+      if (clickedIdx !== -1) {
+        if (clickedIdx !== activeIndex) {
+          setActiveDisk(clickedIdx);
+        } else {
+          insertDiskAndNavigate(clickedIdx);
+        }
+      }
+    } else {
+      // Tap on active disk area
+      insertDiskAndNavigate(activeIndex);
+    }
+  }
+  isTouching = false;
+});
+
 canvasContainer.addEventListener('wheel', (e) => {
   if (Math.abs(e.deltaX) > 25 || Math.abs(e.deltaY) > 40) {
     e.preventDefault();
@@ -797,9 +914,13 @@ function animate() {
 
   floppyDrive.update();
 
+  const camConfig = getResponsiveCameraConfig();
+
+  // Responsive camera lerping for both desktop and mobile
+  camera.position.z += (camConfig.targetZ - camera.position.z) * 0.08;
   camera.position.x += (targetCameraOffset.x - camera.position.x) * 0.05;
-  camera.position.y += (0.12 + targetCameraOffset.y - camera.position.y) * 0.05;
-  camera.lookAt(0, -0.15, 0);
+  camera.position.y += (camConfig.targetY + targetCameraOffset.y - camera.position.y) * 0.05;
+  camera.lookAt(0, camConfig.lookAtY, 0);
 
   diskMeshes.forEach((mesh, i) => {
     if (mesh.userData.isInserting) return; // Managed by insertion animation
@@ -853,9 +974,10 @@ function animate() {
 animate();
 
 window.addEventListener('resize', () => {
-  const width = canvasContainer.clientWidth;
-  const height = canvasContainer.clientHeight;
-  camera.aspect = width / height;
+  const width = canvasContainer.clientWidth || window.innerWidth;
+  const height = canvasContainer.clientHeight || window.innerHeight;
+  camera.aspect = width / Math.max(height, 1);
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);
+  updateDisksTransform(false);
 });
